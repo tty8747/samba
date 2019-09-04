@@ -1,0 +1,19 @@
+---
+
+- hosts: samba
+  remote_user: deploy
+  become: "yes"
+  become_user: "root"
+  become_method: "sudo"
+
+  vars:
+    servername: "{{ inventory_hostname }}"
+    users:
+      - user1
+      - user2
+      - user3
+
+  roles:
+    - { role: info, tags: ['info'] }
+    - { role: common, tags: ['common'] }
+    - { role: docker, tags: ['docker'] }
