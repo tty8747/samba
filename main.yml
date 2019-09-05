@@ -8,10 +8,9 @@
 
   vars:
     servername: "{{ inventory_hostname }}"
-    users:
-      - user1
-      - user2
-      - user3
+    docker_users:
+      - deploy
+      - goto
 
   roles:
     - { role: info, tags: ['info'] }

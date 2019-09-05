@@ -30,3 +30,10 @@
     - docker-ce
     - docker-ce-cli
     - containerd.io
+
+- name: "Add a user to group docker"
+  user:
+    name: "{{ item }}"
+    groups: docker
+    append: yes
+  loop: "{{ docker_users }}"
