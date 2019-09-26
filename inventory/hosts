@@ -1,1 +1,1 @@
-samba ansible_host=samba
+samba ansible_host=192.168.3.80

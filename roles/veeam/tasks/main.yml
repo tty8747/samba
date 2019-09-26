@@ -1,0 +1,25 @@
+---
+
+- name: "Check if veeam-release* is installed"
+  command: dpkg-query -W veeam-release*
+  register: veeam-release_check_deb
+  failed_when: veeam-release_check_deb.rc > 1
+  changed_when: veeam-release_check_deb.rc == 1
+
+- name: "Install deb"
+  apt: deb="{{ path }}"
+  sudo: true
+  when: veeam-release_check_deb.rc == 1
+  
+- name: "Update cache"
+  apt:
+    update_cache: "{{ update_cache }}"
+
+- name: "Install software"
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - lvm2
+    - dkms
+    - veeam
