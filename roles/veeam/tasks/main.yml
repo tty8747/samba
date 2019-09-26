@@ -1,20 +1,26 @@
 ---
 
+- name: "Copy veeam-release"
+  copy:
+    src: "{{ path }}"
+    dest: /root/veeam.deb
+
 - name: "Check if veeam-release* is installed"
   command: dpkg-query -W veeam-release*
-  register: veeam-release_check_deb
-  failed_when: veeam-release_check_deb.rc > 1
-  changed_when: veeam-release_check_deb.rc == 1
+  register: veeam_check_deb
+  failed_when: veeam_check_deb.rc > 1
+  changed_when: veeam_check_deb.rc == 1
 
 - name: "Install deb"
-  apt: deb="{{ path }}"
-  sudo: true
-  when: veeam-release_check_deb.rc == 1
-  
+  apt: 
+    deb: /root/veeam.deb
+  when: veeam_check_deb.changed
+   
 - name: "Update cache"
   apt:
-    update_cache: "{{ update_cache }}"
-
+    update_cache: "yes"
+    cache_valid_time: 43200
+ 
 - name: "Install software"
   apt:
     name: "{{ packages }}"
