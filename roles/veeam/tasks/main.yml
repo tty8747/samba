@@ -12,15 +12,15 @@
   changed_when: veeam_check_deb.rc == 1
 
 - name: "Install deb"
-  apt: 
+  apt:
     deb: /root/veeam.deb
   when: veeam_check_deb.changed
-   
+
 - name: "Update cache"
   apt:
     update_cache: "yes"
     cache_valid_time: 43200
- 
+
 - name: "Install software"
   apt:
     name: "{{ packages }}"
