@@ -1,0 +1,20 @@
+---
+
+- name: "Download docker-compose with checksum url (sha256)"
+  get_url:
+    url: "https://github.com/docker/compose/releases/download/1.25.0-rc2/docker-compose-{{ ansible_system }}-{{ ansible_architecture }}"
+    dest: /usr/local/bin/docker-compose
+    checksum: "sha256:https://github.com/docker/compose/releases/download/1.25.0-rc2/docker-compose-{{ ansible_system }}-{{ ansible_architecture }}.sha256"
+
+- name: "Change docker-compose permissions"
+  file:
+    path: /usr/local/bin/docker-compose
+    mode: u=rwx,g=rwx
+
+- name: "Create docker-compose symbolic link"
+  file:
+    src: /usr/local/bin/docker-compose
+    dest: /usr/bin/docker-compose
+    owner: root
+    group: docker
+    state: link

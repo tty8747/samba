@@ -16,4 +16,5 @@
     - { role: info, tags: ['info'] }
     - { role: common, tags: ['common'] }
     - { role: docker, tags: ['docker'] }
+    - { role: docker-compose, tags: ['docker-compose'] }
     - { role: veeam, tags: ['veeam'] }
