@@ -35,7 +35,7 @@ echo "      - $smb_root/$public:/mnt/$public" >> ./$dc
 
 for (( i = 1; i <= $count; i++ ))
   do
-    mkdir -p $smb_root/$user$i
+    mkdir -p "$smb_root/users/$user$i"
     echo "      - $smb_root/users/$user$i:/mnt/$user$i" >> ./$dc
   done
 
