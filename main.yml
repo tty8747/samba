@@ -18,3 +18,5 @@
     - { role: docker, tags: ['docker'] }
     - { role: docker-compose, tags: ['docker-compose'] }
     - { role: veeam, tags: ['veeam'] }
+    - { role: ufw, tags: ['ufw'] }
+    - { role: samba, tags: ['samba'] }
