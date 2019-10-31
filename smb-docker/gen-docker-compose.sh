@@ -2,9 +2,9 @@
 
 user=user # user names
 dc=docker-compose.yml # output file
-count=50 # user quantity
+count=5 # user quantity
 p_len=12 # pass length
-smb_root=./raid
+smb_root=/raid
 public=public
 
 touch ./$dc
@@ -39,10 +39,12 @@ for (( i = 1; i <= $count; i++ ))
     echo "      - $smb_root/users/$user$i:/mnt/$user$i" >> ./$dc
   done
 
-echo -n "    command: '-s \"Mount;/mnt\"" >> ./$dc
+echo -n "    command: '-s \"full;/mnt\"" >> ./$dc
+echo -n " -s \"$public;/mnt/$public\"" >> ./$dc
 for (( i = 1; i <= $count; i++ ))
   do
-    echo -n " -s \"$user$i Volume;/mnt/$user$i;no;no;no;;$user$i\" -u \"$user$i;$(pwgen $p_len 1)\"" >> ./$dc
+    echo -n " -s \"$user$i;/mnt/$user$i;no;no;no;;$user$i\" -u \"$user$i;$user$i\"" >> ./$dc
+    # echo -n " -s \"$user$i Volume;/mnt/$user$i;yes;no;no;$user$i\" -u \"$user$i;$(pwgen $p_len 1)\"" >> ./$dc
   done
 echo "'" >> ./$dc
 
