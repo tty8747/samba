@@ -1,0 +1,13 @@
+---
+
+- name: "Allow enable UFW"
+  ufw:
+    state: enabled
+
+- name: "Add rules to UFW"
+  ufw:
+    rule: allow
+    name: "{{ item }}"
+  loop:
+    - OpenSSH
+    - Samba
