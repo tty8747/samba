@@ -1,0 +1,5 @@
+---
+
+- name: "Install samba package"
+  apt:
+    name: samba
