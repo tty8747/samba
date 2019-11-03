@@ -3,3 +3,68 @@
 - name: "Install samba package"
   apt:
     name: samba
+
+- name: "Push samba config"
+  template:
+    src: "roles/samba/templates/smb.conf.j2"
+    dest: "/etc/samba/smb.conf"
+    owner: root
+    group: root
+    mode: 0600
+  notify: "Reboot samba that smb.conf changes to apply"
+
+- name: "Ensure Windows limit (16384)"
+  lineinfile:
+    path: "/etc/security/limits.conf"
+    regexp: "-       nofile          16384$"
+    insertbefore: "^# End of file"
+    line: "*                -       nofile          16384"
+  notify: "Reboot a machine that file changes to apply (/etc/security/limits.conf)"
+
+- name: "Create groups"
+  group:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ group_list }}"
+
+- name: "Create folders"
+  file:
+    path: "/raid/{{ item }}"
+    owner: root
+    group: "{{ item }}"
+    mode: u=rwx,g=rwx,o-rwx
+    state: directory
+  loop: "{{ group_list }}"
+
+- name: "Create users"
+  user:
+    name: "{{ item.0.key }}"
+    shell: /usr/sbin/nologin
+    group: "{{ item.1 }}"
+    home: "/raid/users_private/{{ item.0.key }}"
+    password: "{{ item.0.value.password }}"
+    expires: 1422403387
+  loop: "{{ lookup('dict', users)|product(group_list)|list }}"
+  tags:
+    - test4
+
+- name: "Test1"
+  debug:
+    msg: "User name: {{ item.0.key }}, password: {{ item.0.value.password }}, groups: {{ item.1 }}"
+  loop: "{{ lookup('dict', users)|product(group_list)|list }}"
+  tags:
+    - test1
+
+- name: "Test2"
+  debug:
+    msg: "User name: {{ item.0.key }}, password: {{ item.0.value.password }}, groups: {{ item.1 }}, {{ item.2 }}"
+  loop: "{{ lookup('dict', accountant_users)|product(group_list, group_list_accountant)|list }}"
+  tags:
+    - test2
+
+- name: "Test3"
+  debug:
+    msg: "User name: {{ item.0.key }}, password: {{ item.0.value.password }}, groups: {{ item.1 }}, {{ item.2 }}"
+  loop: "{{ lookup('dict', olegs_users)|product(group_list, group_list_oleg)|list }}"
+  tags:
+    - test3
