@@ -38,33 +38,18 @@
 
 - name: "Create users"
   user:
-    name: "{{ item.0.key }}"
+    name: "{{ item.key }}"
     shell: /usr/sbin/nologin
-    group: "{{ item.1 }}"
-    home: "/raid/users_private/{{ item.0.key }}"
-    password: "{{ item.0.value.password }}"
+    groups: "{{ item.value.grps|list }}"
+    home: "/raid/users_private/{{ item.key }}"
     expires: 1422403387
-  loop: "{{ lookup('dict', users)|product(group_list)|list }}"
+  loop: "{{ lookup('dict', users) }}"
   tags:
     - test4
 
 - name: "Test1"
   debug:
-    msg: "User name: {{ item.0.key }}, password: {{ item.0.value.password }}, groups: {{ item.1 }}"
-  loop: "{{ lookup('dict', users)|product(group_list)|list }}"
+    msg: "User name: {{ item.key }}, groups: {{ item.value.grps|list }}, pwd: {{ item.value.password }}"
+  loop: "{{ lookup('dict', users) }}"
   tags:
-    - test1
-
-- name: "Test2"
-  debug:
-    msg: "User name: {{ item.0.key }}, password: {{ item.0.value.password }}, groups: {{ item.1 }}, {{ item.2 }}"
-  loop: "{{ lookup('dict', accountant_users)|product(group_list, group_list_accountant)|list }}"
-  tags:
-    - test2
-
-- name: "Test3"
-  debug:
-    msg: "User name: {{ item.0.key }}, password: {{ item.0.value.password }}, groups: {{ item.1 }}, {{ item.2 }}"
-  loop: "{{ lookup('dict', olegs_users)|product(group_list, group_list_oleg)|list }}"
-  tags:
-    - test3
+    - test

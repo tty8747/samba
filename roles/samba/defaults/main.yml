@@ -3,27 +3,33 @@ group_list:
   - users_private
   - shared
   - UpdateWinCAD5
-
-group_list_accountant:
   - accountants_folder
-
-group_list_oleg:
   - olegs_folder
 
 users:
   user1:
-    password: 111
+    password: "{{ 'Dfkwekl' | password_hash('sha512', 'd32r44') }}"
+    grps:
+      - users_private
+      - shared
+      - UpdateWinCAD5
   user2:
-    password: 222
-
-accountant_users:
-  user100:
-    password: 111
-  user101:
-    password: 222
-
-olegs_users:
-  user200:
-    password: 111
-  user201:
-    password: 222
+    password: "{{ 'mypassword' | password_hash('sha512', 'mysecretsalt') }}"
+    grps:
+      - users_private
+      - shared
+      - UpdateWinCAD5
+  user3:
+    password: "{{ 'mypassword' | password_hash('sha512', 'mysecretsalt') }}"
+    grps:
+      - users_private
+      - shared
+      - UpdateWinCAD5
+      - accountants_folder
+  user4:
+    password: "{{ 'mypassword' | password_hash('sha512', 'mysecretsalt') }}"
+    grps:
+      - users_private
+      - shared
+      - UpdateWinCAD5
+      - olegs_folder
