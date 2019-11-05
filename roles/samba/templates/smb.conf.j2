@@ -258,3 +258,26 @@
 # to the drivers directory for these users to have write rights in it
 ;   write list = root, @lpadmin
 
+[homes]
+   comment = Home Directories
+   browseable = yes
+   read only = no
+   create mask = 0700
+   directory mask = 0700
+   valid users = %S
+
+[users]
+   path = /samba/users
+   browseable = yes
+   read only = no
+   force create mode = 0660
+   force directory mode = 2770
+   valid users = @sambashare @sadmin
+
+[josh]
+   path = /samba/josh
+   browseable = no
+   read only = no
+   force create mode = 0660
+   force directory mode = 2770
+   valid users = josh @sadmin

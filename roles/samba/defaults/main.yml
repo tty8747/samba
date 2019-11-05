@@ -8,26 +8,26 @@ group_list:
 
 users:
   user1:
-    password: "{{ 'Dfkwekl' | password_hash('sha512', 'd32r44') }}"
+    password: "{{ '111' | password_hash('sha512', 'Desalt8') }}"
     grps:
       - users_private
       - shared
       - UpdateWinCAD5
   user2:
-    password: "{{ 'mypassword' | password_hash('sha512', 'mysecretsalt') }}"
+    password: "{{ '222' | password_hash('sha512', 'Desalt8') }}"
     grps:
       - users_private
       - shared
       - UpdateWinCAD5
   user3:
-    password: "{{ 'mypassword' | password_hash('sha512', 'mysecretsalt') }}"
+    password: "{{ '333' | password_hash('sha512', 'Desalt8') }}"
     grps:
       - users_private
       - shared
       - UpdateWinCAD5
       - accountants_folder
   user4:
-    password: "{{ 'mypassword' | password_hash('sha512', 'mysecretsalt') }}"
+    password: "{{ '444' | password_hash('sha512', 'Desalt8') }}"
     grps:
       - users_private
       - shared

@@ -32,24 +32,22 @@
     path: "/raid/{{ item }}"
     owner: root
     group: "{{ item }}"
-    mode: u=rwx,g=rwx,o-rwx
+    mode: u=rwx,g=rwxs,o-rwx
+    mode: u=rwx,g=rwxs,o-rwx
     state: directory
   loop: "{{ group_list }}"
 
 - name: "Create users"
   user:
     name: "{{ item.key }}"
-    shell: /usr/sbin/nologin
+    shell: /bin/bash
+    password: "{{ item.value.password }}"
+    # shell: /usr/sbin/nologin
     groups: "{{ item.value.grps|list }}"
     home: "/raid/users_private/{{ item.key }}"
     expires: 1422403387
   loop: "{{ lookup('dict', users) }}"
-  tags:
-    - test4
 
-- name: "Test1"
-  debug:
-    msg: "User name: {{ item.key }}, groups: {{ item.value.grps|list }}, pwd: {{ item.value.password }}"
-  loop: "{{ lookup('dict', users) }}"
-  tags:
-    - test
+#- name: "Set a password and enable users"
+#  shell: "(echo {{ item.value.password }} | smbpasswd -s -a {{ item.key }}"
+#  loop: "{{ lookup('dict', users) }}"
