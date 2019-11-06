@@ -27,6 +27,12 @@
     state: present
   loop: "{{ group_list }}"
 
+- name: "DEBUG!"
+  debug:
+    msg: "{{ item.key }} --> {{ item.value.name }}"
+  loop: "{{ lookup('dict', group_dict) }}"
+  tags: go
+
 - name: "Create folders"
   file:
     path: "/raid/{{ item }}"
@@ -58,7 +64,6 @@
     permissions: rw
     default: yes
     state: present
-  tags: go
 
 #- name: "Set a password and enable users"
 #  shell: "(echo {{ item.value.password }} | smbpasswd -s -a {{ item.key }}"
