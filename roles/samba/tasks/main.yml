@@ -39,7 +39,6 @@
   user:
     name: "{{ item.key }}"
     comment: "{{ item.value.description }}"
-    password: "{{ item.value.password }}"
     shell: /usr/sbin/nologin
     groups: "{{ item.value.grps | list }}"
     home: "{{ path_to_mount_raid }}/users_private/{{ item.key }}"
@@ -50,7 +49,7 @@
 - name: "Sets default ACL"
   acl:
     path: "{{ path_to_mount_raid }}/{{ item.1 }}"
-    entity: olegs_folder
+    entity: "{{ item.1 }}"
     etype: group
     permissions: rw
     default: yes
@@ -60,4 +59,3 @@
 - name: "Samba: set a password and enable users"
   shell: "(echo {{ item.value.smbpassword }}; echo {{ item.value.smbpassword }}) | smbpasswd -s -a {{ item.key }}"
   loop: "{{ lookup('dict', users) }}"
-  tags: go
