@@ -267,18 +267,34 @@
    directory mask = 0700
    valid users = %S
 
-[users]
-   path = /samba/users
+[shared]
+   path = /raid/shared
    browseable = yes
    read only = no
    force create mode = 0660
    force directory mode = 2770
-   valid users = @sambashare @sadmin
+   valid users = @shared
 
-[josh]
-   path = /samba/josh
-   browseable = no
+[UpdateWinCAD5]
+   path = /raid/UpdateWinCAD5
+   browseable = yes
    read only = no
    force create mode = 0660
    force directory mode = 2770
-   valid users = josh @sadmin
+   valid users = @UpdateWinCAD5
+
+[accountants_folder]
+    path = /raid/accountants_folder
+    browseable = yes
+    read only = no
+    force create mode = 0660
+    force directory mode = 2770
+    valid users = @accountants_folder
+
+[olegs_folder]
+    path = /raid/olegs_folder
+    browseable = yes
+    read only = no
+    force create mode = 0660
+    force directory mode = 2770
+    valid users = @olegs_folder
