@@ -17,24 +17,24 @@ group_dict:
 users:
   user1:
     description: "User firstname and surname"
-    password: "{{ '111' | password_hash('sha512', 'Desalt8') }}"
-    state: absent
+    smbpassword: "ieGhei4a"
+    state: present
     grps:
       - users_private
       - shared
       - UpdateWinCAD5
   user2:
     description: "User firstname and surname"
-    password: "{{ '222' | password_hash('sha512', 'Desalt8') }}"
-    state: absent
+    smbpassword: "johPh5oo"
+    state: present
     grps:
       - users_private
       - shared
       - UpdateWinCAD5
   user3:
     description: "User firstname and surname"
-    password: "{{ '333' | password_hash('sha512', 'Desalt8') }}"
-    state: absent
+    smbpassword: "tahdie5O"
+    state: present
     grps:
       - users_private
       - shared
@@ -42,8 +42,8 @@ users:
       - accountants_folder
   user4:
     description: "User firstname and surname"
-    password: "{{ '444' | password_hash('sha512', 'Desalt8') }}"
-    state: absent
+    smbpassword: "im1TiThe"
+    state: present
     grps:
       - users_private
       - shared
@@ -51,8 +51,8 @@ users:
       - olegs_folder
   user5:
     description: "User firstname and surname"
-    password: "{{ '555' | password_hash('sha512', 'Desalt8') }}"
-    state: absent
+    smbpassword: "ahSah6fo"
+    state: present
     grps:
       - users_private
       - shared
