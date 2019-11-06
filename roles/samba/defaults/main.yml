@@ -18,6 +18,7 @@ users:
   user1:
     description: "User firstname and surname"
     password: "{{ '111' | password_hash('sha512', 'Desalt8') }}"
+    state: absent
     grps:
       - users_private
       - shared
@@ -25,6 +26,7 @@ users:
   user2:
     description: "User firstname and surname"
     password: "{{ '222' | password_hash('sha512', 'Desalt8') }}"
+    state: absent
     grps:
       - users_private
       - shared
@@ -32,6 +34,7 @@ users:
   user3:
     description: "User firstname and surname"
     password: "{{ '333' | password_hash('sha512', 'Desalt8') }}"
+    state: absent
     grps:
       - users_private
       - shared
@@ -40,6 +43,7 @@ users:
   user4:
     description: "User firstname and surname"
     password: "{{ '444' | password_hash('sha512', 'Desalt8') }}"
+    state: absent
     grps:
       - users_private
       - shared
@@ -48,6 +52,7 @@ users:
   user5:
     description: "User firstname and surname"
     password: "{{ '555' | password_hash('sha512', 'Desalt8') }}"
+    state: absent
     grps:
       - users_private
       - shared
