@@ -16,6 +16,18 @@ group_list:
   - accountants_folder
   - olegs_folder
 
+group_dict:
+  private_user_folders:
+    name: users_private
+  public_user_folders:
+    name:
+      - shared
+      - UpdateWinCAD5
+  special_user_folders:
+    name:
+      - accountants_folder
+      - olegs_folder
+
 users:
   user1:
     description: "User firstname and surname"
