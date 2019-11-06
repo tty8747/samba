@@ -49,8 +49,16 @@
 #    remove: yes
 #    state: absent
   loop: "{{ lookup('dict', users) }}"
-  tags:
-    - us
+
+- name: "Sets default ACL"
+  acl:
+    path: /raid/olegs_folder
+    entity: olegs_folder
+    etype: group
+    permissions: rw
+    default: yes
+    state: present
+  tags: go
 
 #- name: "Set a password and enable users"
 #  shell: "(echo {{ item.value.password }} | smbpasswd -s -a {{ item.key }}"
