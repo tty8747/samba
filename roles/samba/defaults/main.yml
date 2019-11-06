@@ -18,7 +18,8 @@ group_list:
 
 group_dict:
   private_user_folders:
-    name: users_private
+    name:
+      - users_private
   public_user_folders:
     name:
       - shared
