@@ -8,6 +8,4 @@
   ufw:
     rule: allow
     name: "{{ item }}"
-  loop:
-    - OpenSSH
-    - Samba
+  loop: "{{ ufw_profiles }}"

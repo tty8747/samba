@@ -10,7 +10,7 @@
     dest: "/etc/samba/smb.conf"
     owner: root
     group: root
-    mode: 0600
+    mode: u=rw,g=r,o=r
   notify: "Reboot samba that smb.conf changes to apply"
 
 - name: "Ensure Windows limit (16384)"
@@ -33,20 +33,24 @@
     owner: root
     group: "{{ item }}"
     mode: u=rwx,g=rwxs,o-rwx
-    mode: u=rwx,g=rwxs,o-rwx
     state: directory
   loop: "{{ group_list }}"
 
 - name: "Create users"
   user:
     name: "{{ item.key }}"
+    comment: "{{ item.value.description }}"
     shell: /bin/bash
     password: "{{ item.value.password }}"
     # shell: /usr/sbin/nologin
     groups: "{{ item.value.grps|list }}"
     home: "/raid/users_private/{{ item.key }}"
     expires: 1422403387
+#    remove: yes
+#    state: absent
   loop: "{{ lookup('dict', users) }}"
+  tags:
+    - us
 
 #- name: "Set a password and enable users"
 #  shell: "(echo {{ item.value.password }} | smbpasswd -s -a {{ item.key }}"
