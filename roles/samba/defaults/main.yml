@@ -1,20 +1,5 @@
 ---
 path_to_mount_raid: /raid
-private_user_folders: users_private
-public_user_folders:
-  - shared
-  - UpdateWinCAD5
-special_user_folders:
-  - accountants_folder
-  - olegs_folder
-
-
-group_list:
-  - users_private
-  - shared
-  - UpdateWinCAD5
-  - accountants_folder
-  - olegs_folder
 
 group_dict:
   private_user_folders:
