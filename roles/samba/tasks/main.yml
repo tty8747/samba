@@ -1,5 +1,4 @@
 ---
-
 - name: "Install samba package"
   apt:
     name: samba
@@ -44,6 +43,7 @@
     shell: /usr/sbin/nologin
     groups: "{{ item.value.grps | list }}"
     home: "{{ path_to_mount_raid }}/users_private/{{ item.key }}"
+    state: "{{ item.value.state }}"
     expires: 1422403387
   loop: "{{ lookup('dict', users) }}"
 
