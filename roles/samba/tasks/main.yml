@@ -57,6 +57,7 @@
     state: present
   loop: "{{ group_dict | dict2items | subelements('value.name') | list }}"
 
-#- name: "Set a password and enable users"
-#  shell: "(echo {{ item.value.password }} | smbpasswd -s -a {{ item.key }}"
-#  loop: "{{ lookup('dict', users) }}"
+- name: "Samba: set a password and enable users"
+  shell: "(echo {{ item.value.smbpassword }}; echo {{ item.value.smbpassword }}) | smbpasswd -s -a {{ item.key }}"
+  loop: "{{ lookup('dict', users) }}"
+  tags: go
