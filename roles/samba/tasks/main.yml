@@ -40,24 +40,22 @@
   user:
     name: "{{ item.key }}"
     comment: "{{ item.value.description }}"
-    shell: /bin/bash
     password: "{{ item.value.password }}"
-    # shell: /usr/sbin/nologin
-    groups: "{{ item.value.grps|list }}"
-    home: "/raid/users_private/{{ item.key }}"
+    shell: /usr/sbin/nologin
+    groups: "{{ item.value.grps | list }}"
+    home: "{{ path_to_mount_raid }}/users_private/{{ item.key }}"
     expires: 1422403387
-#    remove: yes
-#    state: absent
   loop: "{{ lookup('dict', users) }}"
 
 - name: "Sets default ACL"
   acl:
-    path: /raid/olegs_folder
+    path: "{{ path_to_mount_raid }}/{{ item.1 }}"
     entity: olegs_folder
     etype: group
     permissions: rw
     default: yes
     state: present
+  loop: "{{ group_dict | dict2items | subelements('value.name') | list }}"
 
 #- name: "Set a password and enable users"
 #  shell: "(echo {{ item.value.password }} | smbpasswd -s -a {{ item.key }}"
