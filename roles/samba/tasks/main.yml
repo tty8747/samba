@@ -21,45 +21,20 @@
     line: "*                -       nofile          16384"
   notify: "Reboot a machine that file changes to apply (/etc/security/limits.conf)"
 
-#- name: "Create groups"
-#  group:
-#    name: "{{ item }}"
-#    state: present
-#  loop: "{{ group_list }}"
-
 - name: "Create groups"
   group:
     name: "{{ item.1 }}"
     state: present
   loop: "{{ group_dict | dict2items | subelements('value.name') | list }}"
-  tags: go
-
-- name: "DEBUG1!"
-  debug:
-    # msg: "{{ item.name | string }}"
-    msg: "value={{ item.value.name }}"
-    # msg: "{{ group_dict | dict2items(value_name='name') }}"
-  loop: "{{ group_dict | dict2items(key_name='111') }}"
-
-- name: "DEBUG2!"
-  debug:
-    msg: "value={{ item.1 }}"
-  loop: "{{ group_dict | dict2items | subelements('value.name') | list }}"
-  tags: go1
-
-- name: "DEBUG3!"
-  debug:
-    msg: "{{ item }}"
-  loop: "{{ public_user_folders + special_user_folders }}"
 
 - name: "Create folders"
   file:
-    path: "/raid/{{ item }}"
+    path: "{{ path_to_mount_raid }}/{{ item.1 }}"
     owner: root
-    group: "{{ item }}"
+    group: "{{ item.1 }}"
     mode: u=rwx,g=rwxs,o-rwx
     state: directory
-  loop: "{{ group_list }}"
+  loop: "{{ group_dict | dict2items | subelements('value.name') | list }}"
 
 - name: "Create users"
   user:
