@@ -3,53 +3,22 @@ path_to_mount_raid: /raid
 
 group_dict:
   private_user_folders:
-    settings:
-      - name: users_private
-        params:
-          mode: "u=rwx,g=rwxs,o-rwx"
-          owner: nobody
-          folder_state: directory
-          grp_state: present
-          acl_state: present
+    name:
+      - users_private
   public_user_folders:
-    settings:
-      - name: shared
-        params:
-          mode: "u=rwx,g=rwxs,o-rwx"
-          owner: nobody
-          folder_state: directory
-          grp_state: present
-          acl_state: present
-      - name: UpdateWinCAD5
-        params:
-          mode: "u=rwx,g=rwxs,o-rwx"
-          owner: nobody
-          folder_state: directory
-          grp_state: present
-          acl_state: present
+    name:
+      - shared
+      - UpdateWinCAD5
   special_user_folders:
-    settings:
-      - name: accountants_folder
-        params:
-          mode: "u=rwx,g=rwxs,o-rwx"
-          owner: nobody
-          folder_state: directory
-          grp_state: present
-          acl_state: present
-      - name: oleg_folder
-        params:
-          mode: "u=rwx,g=rwxs,o-rwx"
-          owner: nobody
-          folder_state: directory
-          grp_state: present
-          acl_state: present
+    name:
+      - accountants_folder
+      - oleg_folder
 
 users:
   user1:
     description: "User firstname and surname"
     smbpassword: "ieGhei4a"
     state: present
-    enabled: "yes"
     grps:
       - users_private
       - shared
@@ -58,7 +27,6 @@ users:
     description: "User firstname and surname"
     smbpassword: "johPh5oo"
     state: present
-    enabled: "yes"
     grps:
       - users_private
       - shared
@@ -67,7 +35,6 @@ users:
     description: "User firstname and surname"
     smbpassword: "tahdie5O"
     state: present
-    enabled: "yes"
     grps:
       - users_private
       - shared
@@ -77,7 +44,6 @@ users:
     description: "User firstname and surname"
     smbpassword: "im1TiThe"
     state: present
-    enabled: "yes"
     grps:
       - users_private
       - shared
@@ -87,7 +53,6 @@ users:
     description: "User firstname and surname"
     smbpassword: "ahSah6fo"
     state: present
-    enabled: "yes"
     grps:
       - users_private
       - shared
