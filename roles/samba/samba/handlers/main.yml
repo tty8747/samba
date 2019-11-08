@@ -1,0 +1,12 @@
+---
+- name: "Reboot a machine that file changes to apply (/etc/security/limits.conf)"
+  reboot:
+    reboot_timeout: 3600
+
+- name: "Reboot samba that smb.conf changes to apply"
+  systemd:
+    name: "{{ item }}"
+    state: restarted
+  loop:
+    - smbd
+    - nmbd
