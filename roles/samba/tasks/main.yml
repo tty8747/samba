@@ -20,20 +20,25 @@
     line: "*                -       nofile          16384"
   notify: "Reboot a machine that file changes to apply (/etc/security/limits.conf)"
 
+- name: "DEBUG1!"
+  debug:
+    msg: "value={{ item.1.params.grp_state }}"
+  loop: "{{ group_dict | dict2items | subelements('value.settings') }}"
+
 - name: "Create groups"
   group:
-    name: "{{ item.1 }}"
-    state: present
-  loop: "{{ group_dict | dict2items | subelements('value.name') | list }}"
+    name: "{{ item.1.name }}"
+    state: "{{ item.1.params.grp_state }}"
+  loop: "{{ group_dict | dict2items | subelements('value.settings') }}"
 
 - name: "Create folders"
   file:
-    path: "{{ path_to_mount_raid }}/{{ item.1 }}"
-    owner: root
-    group: "{{ item.1 }}"
-    mode: u=rwx,g=rwxs,o-rwx
-    state: directory
-  loop: "{{ group_dict | dict2items | subelements('value.name') | list }}"
+    path: "{{ path_to_mount_raid }}/{{ item.1.name }}"
+    owner: "{{ item.1.params.owner }}"
+    group: "{{ item.1.name}}"
+    mode: "{{ item.1.params.mode }}"
+    state: "{{ item.1.params.folder_state }}"
+  loop: "{{ group_dict | dict2items | subelements('value.settings') }}"
 
 - name: "Create users"
   user:
@@ -48,14 +53,26 @@
 
 - name: "Sets default ACL"
   acl:
-    path: "{{ path_to_mount_raid }}/{{ item.1 }}"
-    entity: "{{ item.1 }}"
+    path: "{{ path_to_mount_raid }}/{{ item.1.name }}"
+    entity: "{{ item.1.name }}"
     etype: group
     permissions: rw
     default: yes
-    state: present
-  loop: "{{ group_dict | dict2items | subelements('value.name') | list }}"
+    state: "{{ item.1.params.acl_state }}"
+  loop: "{{ group_dict | dict2items | subelements('value.settings') }}"
 
 - name: "Samba: set a password and enable users"
   shell: "(echo {{ item.value.smbpassword }}; echo {{ item.value.smbpassword }}) | smbpasswd -s -a {{ item.key }}"
   loop: "{{ lookup('dict', users) }}"
+
+- name: "Enable samba user"
+  command: "smbpasswd -e {{ item.key }}"
+  loop: "{{ users | dict2items }}"
+  # when: "{{ item.value.enabled }} == yes"
+  tags: go1
+
+- name: "Disable samba user"
+  command: "smbpasswd -d {{ item.key }}"
+  loop: "{{ users | dict2items }}"
+  # when: "{{ item.value.enabled }} == yes"
+  tags: go2
