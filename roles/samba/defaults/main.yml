@@ -15,7 +15,7 @@ group_dict:
     settings:
       - name: shared
         params:
-          mode: "u=rwxs,g=rwxs,o=rx"
+          mode: "u=rwxs,g=rwxs,o-rwx"
           owner: nobody
           folder_state: directory
           grp_state: present
@@ -39,6 +39,13 @@ group_dict:
       - name: oleg_folder
         params:
           mode: "u=rwxs,g=rwxs,o-rwx"
+          owner: nobody
+          folder_state: directory
+          grp_state: present
+          acl_state: present
+      - name: local-http-server
+        params:
+          mode: "u=rwxs,g-rwx,o=rx"
           owner: nobody
           folder_state: directory
           grp_state: present
