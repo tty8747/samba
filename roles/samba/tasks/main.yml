@@ -30,7 +30,7 @@
   file:
     path: "{{ path_to_mount_raid }}/{{ item.1.name }}"
     owner: "{{ item.1.params.owner }}"
-    group: "{{ item.1.name}}"
+    group: "{{ item.1.name }}"
     mode: "{{ item.1.params.mode }}"
     state: "{{ item.1.params.folder_state }}"
   loop: "{{ group_dict | dict2items | subelements('value.settings') }}"
