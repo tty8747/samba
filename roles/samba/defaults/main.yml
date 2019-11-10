@@ -6,7 +6,7 @@ group_dict:
     settings:
       - name: users_private
         params:
-          mode: "u=rwx,g=rwxs,o-rwx"
+          mode: "u=rwxs,g=rwxs,o-rwx"
           owner: nobody
           folder_state: directory
           grp_state: present
@@ -15,14 +15,14 @@ group_dict:
     settings:
       - name: shared
         params:
-          mode: "u=rwx,g=rwxs,o-rwx"
+          mode: "u=rwxs,g=rwxs,o=rx"
           owner: nobody
           folder_state: directory
           grp_state: present
           acl_state: present
       - name: UpdateWinCAD5
         params:
-          mode: "u=rwx,g=rwxs,o-rwx"
+          mode: "u=rwxs,g=rwxs,o-rwx"
           owner: nobody
           folder_state: directory
           grp_state: present
@@ -31,14 +31,14 @@ group_dict:
     settings:
       - name: accountants_folder
         params:
-          mode: "u=rwx,g=rwxs,o-rwx"
+          mode: "u=rwxs,g=rwxs,o-rwx"
           owner: nobody
           folder_state: directory
           grp_state: present
           acl_state: present
       - name: oleg_folder
         params:
-          mode: "u=rwx,g=rwxs,o-rwx"
+          mode: "u=rwxs,g=rwxs,o-rwx"
           owner: nobody
           folder_state: directory
           grp_state: present
