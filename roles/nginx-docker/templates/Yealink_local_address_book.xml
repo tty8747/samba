@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root_group>
+	<group display_name="All Contacts" />
+	<group display_name="Blacklist" />
+</root_group>
+<root_contact>
+	<contact display_name="TEST 1" office_number="79876543210" mobile_number="" other_number="" line="-1" ring="Auto" group_id_name="All Contacts" />
+	<contact display_name="TEST 2" office_number="79876543210" mobile_number="" other_number="" line="-1" ring="Auto" group_id_name="All Contacts" />
+	<contact display_name="TEST 3" office_number="79876543210" mobile_number="" other_number="" line="-1" ring="Auto" group_id_name="Blacklist" />
+</root_contact>

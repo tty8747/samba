@@ -1,0 +1,36 @@
+---
+- name: "Install dependencies"
+  pip:
+    name: docker
+
+- name: "Push nginx.conf"
+  template:
+    src: "roles/nginx-docker/templates/nginx.conf.j2"
+    dest: "/root/nginx.conf"
+    owner: root
+    group: root
+    mode: u=r
+
+- name: "Push files to http folder"
+  template:
+    src: "roles/nginx-docker/templates/Yealink_remote_address_book.xml"
+    dest: "/raid/local-http-server/Yealink_remote_address_book.xml"
+    owner: root
+    group: root
+    mode: u=r
+
+- name: "Run a nginx container"
+  docker_container:
+    name: nginx
+    image: nginx
+    state: started
+    restart_policy: always
+    oom_killer: no
+    keep_volumes: yes
+    cpu_period: '100000'
+    cpu_quota: '30000'
+    ports:
+     - "80:80/tcp"
+    volumes:
+      - /raid/local-http-server:/mnt/local-http-server:ro
+      - /root/nginx.conf:/etc/nginx/nginx.conf:ro

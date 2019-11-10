@@ -1,0 +1,15 @@
+<YealinkIPPhoneBook>
+  <Title>Yealink</Title>
+  <Menu Name=""/>
+  <Menu Name="IT">
+    <Unit Name="Full Name" Phone1="79998887766" Phone2="" Phone3="" default_photo="Resource:"/>
+    <Unit Name="Full Name 2" Phone1="79998887766" Phone2="" Phone3="" default_photo="Resource:"/>
+  </Menu>
+  <Menu Name="Производство">
+    <Unit Name="Full Name 3" Phone1="79998887766" Phone2="" Phone3="" default_photo="Resource:"/>
+    <Unit Name="Full Name 4" Phone1="79998887766" Phone2="" Phone3="" default_photo="Resource:"/>
+  </Menu>
+  <Menu Name="Clients">
+    <contact display_name="Алексей Васильевич" office_number="79998887766" mobile_number="" other_number="" line="-1" ring="Auto" group_id_name="All Contacts" />
+  </Menu>
+</YealinkIPPhoneBook>

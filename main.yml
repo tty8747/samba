@@ -21,3 +21,4 @@
     - { role: veeam, tags: ['veeam'] }
     - { role: ufw, tags: ['ufw'] }
     - { role: samba, tags: ['samba'] }
+    - { role: nginx-docker, tags: ['nginx-docker'] }
