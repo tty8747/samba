@@ -55,6 +55,7 @@
     default: yes
     state: "{{ item.1.params.acl_state }}"
   loop: "{{ group_dict | dict2items | subelements('value.settings') }}"
+  when:  item.1.params.acl_state == "present"
 
 - name: "Samba: set a password and enable users"
   shell: "(echo {{ item.value.smbpassword }}; echo {{ item.value.smbpassword }}) | smbpasswd -s -a {{ item.key }}"

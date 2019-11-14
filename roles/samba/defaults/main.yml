@@ -54,9 +54,9 @@ group_dict:
         params:
           mode: "u=rwxs,g=rwxs,o-rwx"
           owner: nobody
-          folder_state: directory
-          grp_state: present
-          acl_state: present
+          folder_state: absent
+          grp_state: absent
+          acl_state: absent
 
 users:
   user1:
@@ -102,6 +102,16 @@ users:
     smbpassword: "ahSah6fo"
     state: present
     enabled: "yes"
+    grps:
+      - users_private
+      - shared
+      - UpdateWinCAD5
+      - oleg_folder
+  user6:
+    description: "User firstname and surname"
+    smbpassword: "esh8Eem1"
+    state: absent
+    enabled: "no"
     grps:
       - users_private
       - shared
