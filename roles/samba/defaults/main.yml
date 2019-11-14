@@ -50,6 +50,13 @@ group_dict:
           folder_state: directory
           grp_state: present
           acl_state: present
+      - name: .deleted
+        params:
+          mode: "u=rwxs,g=rwxs,o-rwx"
+          owner: nobody
+          folder_state: directory
+          grp_state: present
+          acl_state: present
 
 users:
   user1:
