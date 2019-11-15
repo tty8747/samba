@@ -274,7 +274,7 @@
    recycle:maxsize = 1073741824 # 1Gb
    recycle:exclude = *.tmp *.temp *.TMP *.o *.obj ?~$* ~$* *.~?? *.log *.trace ~$* ~* *.iso
    recylce:excludedir = tmp temp cache
-   recycle:repository = .recycle/%U
+   recycle:repository = /raid/users_private/.recycle/%U
 
 [shared]
    path = /raid/shared
@@ -309,7 +309,7 @@
    recycle:maxsize = 1073741824 # 1Gb
    recycle:exclude = *.tmp *.temp *.TMP *.o *.obj ?~$* ~$* *.~?? *.log *.trace ~$* ~* *.iso
    recylce:excludedir = tmp temp cache
-   recycle:repository = .recycle/%U
+   recycle:repository = /raid/UpdateWinCAD5/.recycle/%U
 
 [accountants_folder]
    path = /raid/accountants_folder
@@ -326,15 +326,15 @@
    recycle:maxsize = 1073741824 # 1Gb
    recycle:exclude = *.tmp *.temp *.TMP *.o *.obj ?~$* ~$* *.~?? *.log *.trace ~$* ~* *.iso
    recylce:excludedir = tmp temp cache
-   recycle:repository = .recycle/%U
+   recycle:repository = /raid/accountants_folder/.recycle/%U
 
-[olegs_folder]
-   path = /raid/olegs_folder
+[oleg_folder]
+   path = /raid/oleg_folder
    browseable = yes
    read only = no
    force create mode = 0660
    force directory mode = 2770
-   valid users = @olegs_folder
+   valid users = @oleg_folder
    vfs objects = btrfs recycle
    recycle:keeptree = Yes
    recycle:touch = Yes
@@ -343,4 +343,4 @@
    recycle:maxsize = 1073741824 # 1Gb
    recycle:exclude = *.tmp *.temp *.TMP *.o *.obj ?~$* ~$* *.~?? *.log *.trace ~$* ~* *.iso
    recylce:excludedir = tmp temp cache
-   recycle:repository = .recycle/%U
+   recycle:repository = /raid/oleg_folder/.recycle/%U

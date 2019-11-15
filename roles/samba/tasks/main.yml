@@ -40,12 +40,12 @@
   file:
     path: "{{ path_to_mount_raid }}/{{ item.1.name }}/.recycle"
     owner: nobody
-    group: "{{ item.1.name }}"
-    mode: 0777
+    group: root
+    mode: "a=rwxt"
     state: "{{ item.1.params.folder_state }}"
   loop: "{{ group_dict | dict2items | subelements('value.settings') }}"
-  tags: push
   when:  item.1.params.grp_state == "present"
+  tags: push
 
 - name: "Create users"
   user:
