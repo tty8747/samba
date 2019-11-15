@@ -11,7 +11,6 @@
     group: root
     mode: u=rw,g=r,o=r
   notify: "Reboot samba that smb.conf changes to apply"
-  tags: push
 
 - name: "Ensure Windows limit (16384)"
   lineinfile:
@@ -45,7 +44,6 @@
     state: "{{ item.1.params.folder_state }}"
   loop: "{{ group_dict | dict2items | subelements('value.settings') }}"
   when:  item.1.params.grp_state == "present"
-  tags: push
 
 - name: "Create users"
   user:
