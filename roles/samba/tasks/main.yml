@@ -11,6 +11,7 @@
     group: root
     mode: u=rw,g=r,o=r
   notify: "Reboot samba that smb.conf changes to apply"
+  tags: push
 
 - name: "Ensure Windows limit (16384)"
   lineinfile:
@@ -34,6 +35,17 @@
     mode: "{{ item.1.params.mode }}"
     state: "{{ item.1.params.folder_state }}"
   loop: "{{ group_dict | dict2items | subelements('value.settings') }}"
+
+- name: "Create recycle folders"
+  file:
+    path: "{{ path_to_mount_raid }}/{{ item.1.name }}/.recycle"
+    owner: nobody
+    group: "{{ item.1.name }}"
+    mode: 0777
+    state: "{{ item.1.params.folder_state }}"
+  loop: "{{ group_dict | dict2items | subelements('value.settings') }}"
+  tags: push
+  when:  item.1.params.grp_state == "present"
 
 - name: "Create users"
   user:
