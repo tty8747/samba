@@ -80,3 +80,11 @@
   command: "smbpasswd -d {{ item.key }}"
   loop: "{{ users | dict2items }}"
   when: item.value.enabled == "no"
+
+- name: "Added the task in crontab for delete old files"
+  cron:
+    name: "Delete files older than 30 days in {{ item.1.name }}"
+    special_time: daily
+    job: "/usr/bin/find {{ path_to_mount_raid }}/{{ item.1.name }}/.recycle -type f -mtime +30 -exec rm -rf {} \\;"
+  loop: "{{ group_dict | dict2items | subelements('value.settings') }}"
+  tags: go
